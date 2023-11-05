@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.user_modal {
+  border-radius: 10px;
+  background: rgba(16, 16, 16, 0.04);
+  backdrop-filter: blur(100px);
+}
