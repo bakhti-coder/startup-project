@@ -11,7 +11,7 @@ const Header = () => {
   const [open, setOpen] = useState(false);
   const [userOpen, setUserOpen] = useState(false);
 
-  const { isAuthenticated, logOut } = useAuth();
+  const { isAuthenticated, logOut, role } = useAuth();
 
   const handleButtonClick = () => {
     setUserOpen(!userOpen);
@@ -115,7 +115,6 @@ const Header = () => {
                     <div className="user_modal z-50 absolute p-5 w w-[200px] right-0">
                       <ul>
                         <li className="flex justify-start mb-3 items-center text-white">
-                          {/* <ShoppingBag strokeWidth={1.75} color="black" /> */}
                           <img
                             src={"/images/accounticon.png"}
                             width={24}
@@ -138,6 +137,19 @@ const Header = () => {
                           />
                           <span className="ml-2 text-black">Log out</span>
                         </li>
+                        {role === "admin" && (
+                          <li className="flex justify-start mb-3 items-center text-white">
+                            <img
+                              src={"/images/dashboard.jpg"}
+                              width={24}
+                              height={24}
+                              alt="order"
+                            />
+                            <Link to={"/dashboard"} className="ml-2 text-black">
+                              Dashboard
+                            </Link>
+                          </li>
+                        )}
                       </ul>
                     </div>
                   )}
