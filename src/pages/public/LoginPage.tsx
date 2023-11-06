@@ -7,6 +7,7 @@ import Cookies from "js-cookie";
 import { ROLE, TOKEN, USER } from "../../constants";
 import request from "../../server";
 import { UserType } from "../../types";
+import useAuth from "../../zustand/Auth";
 
 export type Inputs = {
   username: string;
@@ -18,6 +19,9 @@ const LoginPage = () => {
   const navigate = useNavigate();
 
   const { register, handleSubmit } = useForm<Inputs>();
+
+  const { isAuthenticated, user, role } = useAuth();
+  console.log(isAuthenticated, user, role);
 
   const onSubmit = async (data: Inputs) => {
     const values = data;
@@ -32,7 +36,7 @@ const LoginPage = () => {
       Cookies.set(TOKEN, token);
       Cookies.set(ROLE, user.role);
       localStorage.setItem(USER, JSON.stringify(user));
-
+      
       if (user.role === "admin") {
         navigate("/dashboard");
       } else if (user.role === "client") {
