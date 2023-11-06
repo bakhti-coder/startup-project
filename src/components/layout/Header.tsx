@@ -138,7 +138,7 @@ const Header = () => {
                           <span className="ml-2 text-black">Log out</span>
                         </li>
                         {role === "admin" && (
-                          <li className="flex justify-start mb-3 items-center text-white">
+                          <li className="flex justify-start mt-3 items-center text-white">
                             <img
                               src={"/images/dashboard.jpg"}
                               width={24}

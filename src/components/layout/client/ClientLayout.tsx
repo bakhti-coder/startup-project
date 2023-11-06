@@ -1,5 +1,10 @@
 import { useState } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
+
+import { Button, Layout, Menu, theme } from "antd";
+import { Content, Header } from "antd/es/layout/layout";
+import Sider from "antd/es/layout/Sider";
+
 import {
   AppstoreOutlined,
   MenuFoldOutlined,
@@ -9,10 +14,6 @@ import {
 } from "@ant-design/icons";
 
 import "../admin/style.css";
-
-import { Layout, Menu, Button, theme } from "antd";
-import Sider from "antd/es/layout/Sider";
-import { Content, Header } from "antd/es/layout/layout";
 
 const ClientLayout = () => {
   const location = useLocation();
@@ -30,7 +31,7 @@ const ClientLayout = () => {
         collapsible
         collapsed={collapsed}
       >
-        <div className="admin-logo">{collapsed ? "PTP" : "PTP admin"}</div>
+        <div className="admin-logo">{collapsed ? "CLIENT" : "Client admin"}</div>
         <Menu
           theme="dark"
           mode="inline"
