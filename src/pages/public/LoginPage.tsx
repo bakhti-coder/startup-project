@@ -36,7 +36,7 @@ const LoginPage = () => {
       Cookies.set(TOKEN, token);
       Cookies.set(ROLE, user.role);
       localStorage.setItem(USER, JSON.stringify(user));
-      
+
       if (user.role === "admin") {
         navigate("/dashboard");
       } else if (user.role === "client") {

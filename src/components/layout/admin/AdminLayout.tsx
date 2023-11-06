@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
 
-import { Button, Layout, Menu, theme } from "antd";
+import { Button, Flex, Layout, Menu, theme } from "antd";
 import { Content, Header } from "antd/es/layout/layout";
 import Sider from "antd/es/layout/Sider";
 
@@ -20,8 +20,13 @@ import {
 import "./style.css";
 
 const AdminLayout = () => {
+  const [userOpen, setUserOpen] = useState(false);
   const location = useLocation();
   const [collapsed, setCollapsed] = useState(false);
+
+  const handleButtonClick = () => {
+    setUserOpen(!userOpen);
+  };
 
   const {
     token: { colorBgContainer },
@@ -76,23 +81,6 @@ const AdminLayout = () => {
               icon: <MessageOutlined />,
               label: <Link to="/messages">Messages</Link>,
             },
-            // {
-            //   icon: <LogoutOutlined />,
-            //   label: (
-            //     <Button
-            //       danger
-            //       type="primary"
-            //       onClick={() =>
-            //         Modal.confirm({
-            //           title: "Do you want to exit ?",
-            //           onOk: () => {},
-            //         })
-            //       }
-            //     >
-            //       Logout
-            //     </Button>
-            //   ),
-            // },
           ]}
         />
       </Sider>
@@ -104,16 +92,41 @@ const AdminLayout = () => {
             background: colorBgContainer,
           }}
         >
-          <Button
-            type="text"
-            icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-            onClick={() => setCollapsed(!collapsed)}
-            style={{
-              fontSize: "16px",
-              width: 64,
-              height: 64,
-            }}
-          />
+          <Flex justify="space-between" align="center">
+            <Button
+              type="text"
+              icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+              onClick={() => setCollapsed(!collapsed)}
+              style={{
+                fontSize: "16px",
+                width: 64,
+                height: 64,
+              }}
+            />
+            {location.pathname === "/users" && (
+              <div
+                onClick={handleButtonClick}
+                className=" -mt-1 z-50 relative mr-10"
+              >
+                <div className="bg-[#DB4444] rounded-full cursor-pointer">
+                  <img
+                    src={"/images/user.jpg"}
+                    width={30}
+                    height={30}
+                    alt="user"
+                  />
+                </div>
+                {userOpen && (
+                  <div
+                    onClick={() => setUserOpen(false)}
+                    className="user_modal z-50 absolute p-1  w-[300px] right-0"
+                  >
+                    <Flex>asdf</Flex>
+                  </div>
+                )}
+              </div>
+            )}
+          </Flex>
         </Header>
         <Content
           className="admin-main"
