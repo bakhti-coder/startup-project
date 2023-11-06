@@ -13,6 +13,9 @@ import {
 } from "antd";
 const { RangePicker } = DatePicker;
 
+import dayjs from "dayjs";
+import customParseFormat from "dayjs/plugin/customParseFormat";
+
 import { LIMIT } from "../../constants";
 import useEducation from "../../zustand/education";
 
@@ -42,6 +45,9 @@ const EducationPage = () => {
   useEffect(() => {
     getData();
   }, [getData]);
+
+  dayjs.extend(customParseFormat);
+  const dateFormat = "YYYY-MM-DD";
 
   const columns = [
     {
@@ -195,11 +201,19 @@ const EducationPage = () => {
             <Input.TextArea />
           </Form.Item>
 
-          <RangePicker
+          {/* <RangePicker
             showTime={{
               format: "HH:mm",
             }}
+            
             format="YYYY-MM-DD HH:mm"
+          /> */}
+
+          <RangePicker
+            defaultValue={[
+              dayjs("2019-09-03", dateFormat),
+              dayjs("2019-11-22", dateFormat),
+            ]}
           />
         </Form>
       </Modal>

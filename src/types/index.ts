@@ -55,3 +55,20 @@ export interface Education {
   user: null | UserType;
   __v: number;
 }
+
+export interface Photo {
+  _id: string;
+  name: string;
+  user: string;
+  __v: number;
+}
+
+export interface Portfolios {
+  _id: string;
+  name: string;
+  description: string;
+  photo: Photo;
+  __v: number;
+  user: null | UserType;
+  percent: number;
+}

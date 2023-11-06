@@ -1,9 +1,10 @@
 import { FormInstance } from "antd";
+import { UploadChangeParam, UploadFile } from "antd/es/upload";
 
 import { create } from "zustand";
 
 import request from "../server";
-import { PaginationType } from "../types";
+import { PaginationType, Photo } from "../types";
 
 const crud = <T>(url: string) => {
   interface DataState {
@@ -17,11 +18,14 @@ const crud = <T>(url: string) => {
     isModalOpen: boolean;
     btnLoading: boolean;
     btnId: string | null;
+    photoLoading: boolean;
+    photo: null | Photo;
     closeModal: () => void;
     showModal: (form: FormInstance) => void;
     handleSearch: (e: React.ChangeEvent<HTMLInputElement>) => void;
     handlePage: (page: number) => void;
     getData: () => void;
+    uploadPhoto: (photo: UploadChangeParam<UploadFile>) => void;
     handleOk: (form: FormInstance) => void;
     handleOkDate: (form: FormInstance) => void;
     handleEdit: (id: string, form: FormInstance) => void;
@@ -38,6 +42,8 @@ const crud = <T>(url: string) => {
     isModalLoading: false,
     isModalOpen: false,
     btnLoading: false,
+    photoLoading: false,
+    photo: null,
     btnId: null,
     closeModal: () => {
       set((state) => ({ ...state, isModalOpen: false }));
@@ -45,6 +51,7 @@ const crud = <T>(url: string) => {
     showModal: (form) => {
       set((state) => ({ ...state, isModalOpen: true }));
       set((state) => ({ ...state, selected: null }));
+      set({ photo: null });
       form.resetFields();
     },
     handlePage: (page) => {
@@ -77,6 +84,22 @@ const crud = <T>(url: string) => {
         set((state) => ({ ...state, loading: false }));
       }
     },
+    uploadPhoto: async (e) => {
+      set({ photo: null });
+      try {
+        set({ photoLoading: true });
+        const formData = new FormData();
+        if (e.file && e.file.originFileObj) {
+          formData.append("file", e.file.originFileObj);
+        }
+        const { data } = await request.post("upload", formData);
+
+        set({ photo: data });
+      } finally {
+        set({ photoLoading: false });
+      }
+    },
+
     handleOk: async (form) => {
       const values = await form.validateFields();
       const { selected } = get();
@@ -115,7 +138,6 @@ const crud = <T>(url: string) => {
         set((state) => ({ ...state, isModalLoading: false }));
       }
     },
-
     handleEdit: async (id, form) => {
       try {
         set((state) => ({ ...state, selected: id }));
@@ -126,6 +148,7 @@ const crud = <T>(url: string) => {
         }>(`${url}/${id}`);
         set((state) => ({ ...state, isModalOpen: true }));
         form.setFieldsValue(data);
+        set({ photo: data.photo });
       } finally {
         set((state) => ({ ...state, loading: false }));
       }
