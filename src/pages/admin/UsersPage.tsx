@@ -17,7 +17,7 @@ import {
 import { LIMIT } from "../../constants";
 import { UserType } from "../../types";
 import { userImage } from "../../utils/Image";
-import useUser from "../../zustand/user";
+import useUser from "../../utils/user";
 
 const UsersPage = () => {
   const [form] = Form.useForm();

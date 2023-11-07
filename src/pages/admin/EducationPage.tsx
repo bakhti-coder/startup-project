@@ -17,7 +17,7 @@ import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 
 import { LIMIT } from "../../constants";
-import useEducation from "../../zustand/education";
+import useEducation from "../../utils/education";
 
 const EducationPage = () => {
   const [form] = Form.useForm();

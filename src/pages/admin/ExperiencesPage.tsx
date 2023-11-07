@@ -14,7 +14,7 @@ import {
 const { RangePicker } = DatePicker;
 
 import { LIMIT } from "../../constants";
-import useExperiences from "../../zustand/experiences";
+import useExperiences from "../../utils/experiences";
 
 const ExperiencesPage = () => {
   const [form] = Form.useForm();

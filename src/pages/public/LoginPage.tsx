@@ -7,7 +7,7 @@ import Cookies from "js-cookie";
 import { ROLE, TOKEN, USER } from "../../constants";
 import request from "../../server";
 import { UserType } from "../../types";
-import useAuth from "../../zustand/auth";
+import useAuth from "../../utils/auth";
 
 export type Inputs = {
   username: string;
