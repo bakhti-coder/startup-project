@@ -16,7 +16,7 @@ import SkilsPageClinent from "./pages/client/SkilsPageClinent";
 import HomePage from "./pages/public/HomePage";
 import LoginPage from "./pages/public/LoginPage";
 import RegisterPage from "./pages/public/RegisterPage";
-import useAuth from "./store/auth";
+import useAuth from "./state/auth";
 
 function App() {
   const { role } = useAuth();

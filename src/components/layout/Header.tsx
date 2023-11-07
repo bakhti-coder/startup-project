@@ -5,7 +5,7 @@ import Hamburger from "hamburger-react";
 import Cookies from "js-cookie";
 
 import { TOKEN, USER } from "../../constants";
-import useAuth from "../../store/auth";
+import useAuth from "../../state/auth";
 
 const Header = () => {
   const [open, setOpen] = useState(false);
