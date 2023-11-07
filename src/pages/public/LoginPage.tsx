@@ -1,12 +1,6 @@
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 
-import Cookies from "js-cookie";
-
-import { ROLE, TOKEN, USER } from "../../constants";
-import request from "../../server";
-import { UserType } from "../../types";
 import useAuth from "../../state/auth";
 
 export type Inputs = {
@@ -15,38 +9,15 @@ export type Inputs = {
 };
 
 const LoginPage = () => {
-  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const { register, handleSubmit } = useForm<Inputs>();
 
-  const { isAuthenticated, user, role } = useAuth();
-  console.log(isAuthenticated, user, role);
+  const { login, loading } = useAuth();
 
   const onSubmit = async (data: Inputs) => {
     const values = data;
-    try {
-      setLoading(true);
-      const {
-        data: { token, user },
-      } = await request.post<{ token: string; user: UserType }>(
-        "auth/login",
-        values
-      );
-      Cookies.set(TOKEN, token);
-      Cookies.set(ROLE, user.role);
-      localStorage.setItem(USER, JSON.stringify(user));
-
-      if (user.role === "admin") {
-        navigate("/dashboard");
-      } else if (user.role === "client") {
-        navigate("/education/client");
-      } else {
-        navigate("/");
-      }
-    } finally {
-      setLoading(false);
-    }
+    login(values, navigate);
   };
 
   return (

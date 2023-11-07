@@ -1,26 +1,24 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import Hamburger from "hamburger-react";
-import Cookies from "js-cookie";
 
-import { TOKEN, USER } from "../../constants";
 import useAuth from "../../state/auth";
 
 const Header = () => {
+  const navigate = useNavigate();
+
   const [open, setOpen] = useState(false);
   const [userOpen, setUserOpen] = useState(false);
 
   const { isAuthenticated, logOut, role } = useAuth();
 
-  const handleButtonClick = () => {
-    setUserOpen(!userOpen);
+  const handleLogOut = () => {
+    logOut(navigate);
   };
 
-  const handleLogOut = () => {
-    Cookies.remove(TOKEN);
-    localStorage.removeItem(USER);
-    logOut();
+  const handleButtonClick = () => {
+    setUserOpen(!userOpen);
   };
 
   return (
@@ -126,6 +124,19 @@ const Header = () => {
                             Account
                           </Link>
                         </li>
+                        {role === "admin" && (
+                          <li className="flex justify-start mb-3 items-center text-white">
+                            <img
+                              src={"/images/dashboard.jpg"}
+                              width={24}
+                              height={24}
+                              alt="order"
+                            />
+                            <Link to={"/dashboard"} className="ml-2 text-black">
+                              Dashboard
+                            </Link>
+                          </li>
+                        )}
                         <li
                           onClick={handleLogOut}
                           className="flex justify-start items-center text-white"
@@ -138,19 +149,6 @@ const Header = () => {
                           />
                           <span className="ml-2 text-black">Log out</span>
                         </li>
-                        {role === "admin" && (
-                          <li className="flex justify-start mt-3 items-center text-white">
-                            <img
-                              src={"/images/dashboard.jpg"}
-                              width={24}
-                              height={24}
-                              alt="order"
-                            />
-                            <Link to={"/dashboard"} className="ml-2 text-black">
-                              Dashboard
-                            </Link>
-                          </li>
-                        )}
                       </ul>
                     </div>
                   )}
