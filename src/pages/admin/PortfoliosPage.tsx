@@ -19,8 +19,8 @@ import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 
 import { LIMIT } from "../../constants";
 import { Photo } from "../../types";
-import { getImage } from "../../utils/Image";
-import usePortfolios from "../../utils/portfolios";
+import { getImage } from "../../store/Image";
+import usePortfolios from "../../store/portfolios";
 
 const PortfoliosPage = () => {
   const [form] = Form.useForm();
