@@ -4,6 +4,7 @@ export interface UserType {
   client: false;
   _id: string;
   firstName: string;
+  photo: string;
   lastName: string;
   username: string;
   password: string;
@@ -17,7 +18,6 @@ export interface UserType {
   phoneNumber: string;
   telegram: string;
   youtube: string;
-  photo: string;
 }
 
 export interface Skills {
@@ -71,4 +71,14 @@ export interface Portfolios {
   __v: number;
   user: null | UserType;
   percent: number;
+}
+
+export interface getOnePortfolios {
+  _id: string;
+  name: string;
+  description: string;
+  photo?: Photo;
+  url: string;
+  user: string;
+  __v: 0;
 }

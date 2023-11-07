@@ -13,7 +13,7 @@ import {
 
 import { LIMIT } from "../../constants";
 import { Skills } from "../../types";
-import useSkills from "../../zustand/Skills";
+import useSkills from "../../zustand/skills";
 
 const SkillsAdmin = () => {
   const [form] = Form.useForm();

@@ -19,7 +19,7 @@ const crud = <T>(url: string) => {
     btnLoading: boolean;
     btnId: string | null;
     photoLoading: boolean;
-    photo: null | Photo;
+    photo: Photo | null;
     closeModal: () => void;
     showModal: (form: FormInstance) => void;
     handleSearch: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -99,7 +99,6 @@ const crud = <T>(url: string) => {
         set({ photoLoading: false });
       }
     },
-
     handleOk: async (form) => {
       const values = await form.validateFields();
       const { selected } = get();
@@ -142,10 +141,7 @@ const crud = <T>(url: string) => {
       try {
         set((state) => ({ ...state, selected: id }));
         set((state) => ({ ...state, loading: true }));
-        const { data } = await request.get<{
-          pagination: PaginationType;
-          data: T;
-        }>(`${url}/${id}`);
+        const { data } = await request.get(`${url}/${id}`);
         set((state) => ({ ...state, isModalOpen: true }));
         form.setFieldsValue(data);
         set({ photo: data.photo });
