@@ -1,8 +1,9 @@
 import { Outlet } from "react-router-dom";
+
 import Footer from "../Footer";
 import Header from "../Header";
 
-const FrontLayout = () => {
+function FrontLayout() {
   return (
     <main>
       <Header />
@@ -10,6 +11,6 @@ const FrontLayout = () => {
       <Footer />
     </main>
   );
-};
+}
 
 export default FrontLayout;
