@@ -9,7 +9,9 @@ import {
   Modal,
   Pagination,
   Space,
+  Switch,
   Table,
+  Tooltip,
 } from "antd";
 
 import { LIMIT } from "../../constants";
@@ -31,10 +33,12 @@ const UsersPage = () => {
     page,
     btnLoading,
     btnId,
+    loadingRole,
     closeModal,
     showModal,
     handleSearch,
     handleOk,
+    changeRole,
     handleEdit,
     handleDelete,
     getData,
@@ -77,8 +81,22 @@ const UsersPage = () => {
       title: "Action",
       dataIndex: "_id",
       key: "_id",
-      render: (id: string) => (
+      render: (id: string, row: UserType) => (
         <Space size="middle">
+          <Tooltip
+            placement="topLeft"
+            title={
+              row.role === "user" ? "Change role client" : "Change role user"
+            }
+          >
+            <Switch
+              className="bg-black"
+              defaultChecked={row.role === "user" ? false : true}
+              onChange={(e) => changeRole(row._id, e)}
+              loading={loadingRole ? true : false}
+              disabled={row.role === "admin" || loadingRole}
+            />
+          </Tooltip>
           <Button
             className="bg-blue-700"
             type="primary"

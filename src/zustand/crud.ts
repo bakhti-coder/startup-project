@@ -1,4 +1,4 @@
-import { FormInstance } from "antd";
+import { FormInstance, message } from "antd";
 import { UploadChangeParam, UploadFile } from "antd/es/upload";
 
 import { create } from "zustand";
@@ -20,11 +20,13 @@ const crud = <T>(url: string) => {
     btnId: string | null;
     photoLoading: boolean;
     photo: Photo | null;
+    loadingRole: boolean;
     closeModal: () => void;
     showModal: (form: FormInstance) => void;
     handleSearch: (e: React.ChangeEvent<HTMLInputElement>) => void;
     handlePage: (page: number) => void;
     getData: () => void;
+    changeRole: (id: string, checked: boolean) => void;
     uploadPhoto: (photo: UploadChangeParam<UploadFile>) => void;
     handleOk: (form: FormInstance) => void;
     handleOkDate: (form: FormInstance) => void;
@@ -45,6 +47,7 @@ const crud = <T>(url: string) => {
     photoLoading: false,
     photo: null,
     btnId: null,
+    loadingRole: false,
     closeModal: () => {
       set((state) => ({ ...state, isModalOpen: false }));
     },
@@ -82,6 +85,24 @@ const crud = <T>(url: string) => {
         }));
       } finally {
         set((state) => ({ ...state, loading: false }));
+      }
+    },
+    changeRole: async (id, e) => {
+      try {
+        set({ loadingRole: true });
+        if (e) {
+          const client = "client";
+          await request.put(`users/${id}`, { role: client });
+          get().getData();
+          message.success("Client role changed successfully");
+        } else {
+          const user = "user";
+          await request.put(`users/${id}`, { role: user });
+          get().getData();
+          message.success("User role changed successfully");
+        }
+      } finally {
+        set({ loadingRole: false });
       }
     },
     uploadPhoto: async (e) => {
