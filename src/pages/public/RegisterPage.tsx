@@ -29,10 +29,7 @@ const RegisterPage = () => {
           className="rounded-2xl max-w-800 m-auto"
           onSubmit={handleSubmit(onSubmit)}
         >
-          <h2 className="text-4xl font-bold text-white">Login</h2>
-          <p className="text-sm mt-4 text-gray-200">
-            If you have an account, please login
-          </p>
+          <h2 className="text-4xl font-bold text-white">Register</h2>
 
           <div className="mt-6">
             <div>
