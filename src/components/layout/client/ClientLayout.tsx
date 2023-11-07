@@ -31,7 +31,9 @@ const ClientLayout = () => {
         collapsible
         collapsed={collapsed}
       >
-        <div className="admin-logo">{collapsed ? "CLIENT" : "Client admin"}</div>
+        <div className="admin-logo">
+          {collapsed ? "CLIENT" : "Client admin"}
+        </div>
         <Menu
           theme="dark"
           mode="inline"

@@ -12,8 +12,8 @@ import {
 } from "antd";
 
 import { LIMIT } from "../../constants";
-import { Skills } from "../../types";
 import useSkills from "../../state/skills";
+import { Skills } from "../../types";
 
 const SkillsAdmin = () => {
   const [form] = Form.useForm();

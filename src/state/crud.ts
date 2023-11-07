@@ -9,6 +9,7 @@ import { PaginationType, Photo } from "../types";
 const crud = <T>(url: string) => {
   interface DataState {
     data: T[];
+    dataUser: T[];
     loading: boolean;
     total: number;
     search: string;
@@ -28,6 +29,7 @@ const crud = <T>(url: string) => {
     handlePage: (page: number) => void;
     handleUser: (id: string | undefined) => void;
     getData: () => void;
+    getDataUser: () => void;
     changeRole: (id: string, checked: boolean) => void;
     uploadPhoto: (photo: UploadChangeParam<UploadFile>) => void;
     handleOk: (form: FormInstance) => void;
@@ -38,6 +40,7 @@ const crud = <T>(url: string) => {
 
   return create<DataState>((set, get) => ({
     data: [],
+    dataUser: [],
     loading: false,
     total: 0,
     search: "",
@@ -88,6 +91,31 @@ const crud = <T>(url: string) => {
         set((state) => ({
           ...state,
           data: data.map((el: T, i: number) => ({ ...el, key: i })),
+        }));
+      } finally {
+        set((state) => ({ ...state, loading: false }));
+      }
+    },
+    getDataUser: async () => {
+      const { search } = get();
+      const { page } = get();
+      const { userId } = get();
+      console.log(userId);
+
+      try {
+        set((state) => ({ ...state, loading: true }));
+        const {
+          data: { pagination, data },
+        } = await request.get<{
+          pagination: PaginationType;
+          data: T[];
+        }>(url, {
+          params: { search, page },
+        });
+        set((state) => ({ ...state, total: pagination.total }));
+        set((state) => ({
+          ...state,
+          dataUser: data.map((el: T, i: number) => ({ ...el, key: i })),
         }));
       } finally {
         set((state) => ({ ...state, loading: false }));

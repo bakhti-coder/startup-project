@@ -3,6 +3,7 @@ export interface UserType {
   fields: string[];
   client: false;
   _id: string;
+  info: string;
   firstName: string;
   photo: string;
   lastName: string;
@@ -15,7 +16,9 @@ export interface UserType {
   email: string;
   facebook: string;
   instagram: string;
+  github: string;
   phoneNumber: string;
+  linkedin: string;
   telegram: string;
   youtube: string;
 }
