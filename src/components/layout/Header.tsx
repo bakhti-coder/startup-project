@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Hamburger from "hamburger-react";
 import Cookies from "js-cookie";
 
-import { TOKEN } from "../../constants";
+import { TOKEN, USER } from "../../constants";
 import useAuth from "../../zustand/auth";
 
 const Header = () => {
@@ -19,6 +19,7 @@ const Header = () => {
 
   const handleLogOut = () => {
     Cookies.remove(TOKEN);
+    localStorage.removeItem(USER);
     logOut();
   };
 

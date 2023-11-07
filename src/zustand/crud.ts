@@ -21,10 +21,12 @@ const crud = <T>(url: string) => {
     photoLoading: boolean;
     photo: Photo | null;
     loadingRole: boolean;
+    userId: string;
     closeModal: () => void;
     showModal: (form: FormInstance) => void;
     handleSearch: (e: React.ChangeEvent<HTMLInputElement>) => void;
     handlePage: (page: number) => void;
+    handleUser: (id: string | undefined) => void;
     getData: () => void;
     changeRole: (id: string, checked: boolean) => void;
     uploadPhoto: (photo: UploadChangeParam<UploadFile>) => void;
@@ -48,6 +50,7 @@ const crud = <T>(url: string) => {
     photo: null,
     btnId: null,
     loadingRole: false,
+    userId: "",
     closeModal: () => {
       set((state) => ({ ...state, isModalOpen: false }));
     },
@@ -64,6 +67,9 @@ const crud = <T>(url: string) => {
     handleSearch: (e) => {
       set((state) => ({ ...state, search: e.target.value }));
       get().getData();
+    },
+    handleUser: (id) => {
+      set({ userId: id });
     },
     getData: async () => {
       const { search } = get();
