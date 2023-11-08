@@ -15,9 +15,9 @@ import {
 } from "antd";
 
 import { LIMIT } from "../../constants";
-import { UserType } from "../../types";
 import { userImage } from "../../state/Image";
 import useUser from "../../state/user";
+import { UserType } from "../../types";
 
 const UsersPage = () => {
   const [form] = Form.useForm();

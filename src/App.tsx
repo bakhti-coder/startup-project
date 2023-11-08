@@ -11,6 +11,7 @@ import PortfoliosPage from "./pages/admin/PortfoliosPage";
 import SkillsAdmin from "./pages/admin/Skills";
 import UsersPage from "./pages/admin/UsersPage";
 import AccountPage from "./pages/all/AccountPage";
+import DashboardClient from "./pages/client/DashboardClient";
 import EducationPageClient from "./pages/client/EducationPageClient";
 import SkilsPageClinent from "./pages/client/SkilsPageClinent";
 import HomePage from "./pages/public/HomePage";
@@ -36,6 +37,7 @@ function App() {
             role === "client" ? <ClientLayout /> : <Navigate to="/login" />
           }
         >
+          <Route path="/dashboard/client" element={<DashboardClient />} />
           <Route path="/education/client" element={<EducationPageClient />} />
           <Route path="/skills/client" element={<SkilsPageClinent />} />
         </Route>

@@ -52,7 +52,7 @@ const useAuth = create<AuthTypes>((set) => ({
       set({ isAuthenticated: true, role: user?.role });
 
       if (user?.role === "client") {
-        navigate("/education/client");
+        navigate("/dashboard/client");
       } else if (user?.role === "user") {
         navigate("/");
       } else {

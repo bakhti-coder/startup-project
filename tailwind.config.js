@@ -14,6 +14,9 @@ export default {
         708: `${708 / 16}rem`,
         358: `${358 / 16}rem`,
       },
+      colors: {
+        primary: "#3C50E0",
+      },
       backgroundImage: {
         "login-bg": "url('/images/loginbg.jpg')",
       },

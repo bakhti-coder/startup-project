@@ -124,7 +124,7 @@ const Header = () => {
                             Account
                           </Link>
                         </li>
-                        {role === "admin" && (
+                        {(role === "admin" && (
                           <li className="flex justify-start mb-3 items-center text-white">
                             <img
                               src={"/images/dashboard.jpg"}
@@ -136,7 +136,23 @@ const Header = () => {
                               Dashboard
                             </Link>
                           </li>
-                        )}
+                        )) ||
+                          (role === "client" && (
+                            <li className="flex justify-start mb-3 items-center text-white">
+                              <img
+                                src={"/images/dashboard.jpg"}
+                                width={24}
+                                height={24}
+                                alt="order"
+                              />
+                              <Link
+                                to={"/dashboard/client"}
+                                className="ml-2 text-black"
+                              >
+                                Dashboard
+                              </Link>
+                            </li>
+                          ))}
                         <li
                           onClick={handleLogOut}
                           className="flex justify-start items-center text-white"

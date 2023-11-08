@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, Outlet, useLocation } from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 
 import { Button, Flex, Layout, Menu, theme } from "antd";
 import { Content, Header } from "antd/es/layout/layout";
@@ -17,12 +17,17 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 
+import useAuth from "../../../state/auth";
+
 import "./style.css";
 
 const AdminLayout = () => {
+  const navigate = useNavigate();
   const [userOpen, setUserOpen] = useState(false);
   const location = useLocation();
   const [collapsed, setCollapsed] = useState(false);
+
+  const { logOut } = useAuth();
 
   const handleButtonClick = () => {
     setUserOpen(!userOpen);
@@ -31,6 +36,10 @@ const AdminLayout = () => {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
+
+  const handleLogOut = () => {
+    logOut(navigate);
+  };
 
   return (
     <Layout>
@@ -103,29 +112,42 @@ const AdminLayout = () => {
                 height: 64,
               }}
             />
-            {location.pathname === "/users" && (
-              <div
-                onClick={handleButtonClick}
-                className=" -mt-1 z-50 relative mr-10"
-              >
-                <div className="bg-[#DB4444] rounded-full cursor-pointer">
-                  <img
-                    src={"/images/user.jpg"}
-                    width={30}
-                    height={30}
-                    alt="user"
-                  />
-                </div>
-                {userOpen && (
-                  <div
-                    onClick={() => setUserOpen(false)}
-                    className="user_modal z-50 absolute p-1  w-[300px] right-0"
-                  >
-                    <Flex>asdf</Flex>
-                  </div>
-                )}
+            {/* {location.pathname === "/users" || location.pathname === "/dashboard" && ( */}
+            <div
+              onClick={handleButtonClick}
+              className=" -mt-1 z-50 relative mr-10"
+            >
+              <div className="bg-[#DB4444] rounded-full cursor-pointer">
+                <img
+                  src={"/images/user.jpg"}
+                  width={30}
+                  height={30}
+                  alt="user"
+                />
               </div>
-            )}
+              {userOpen && (
+                <div
+                  onClick={() => setUserOpen(false)}
+                  className="user_modal z-50 absolute p-1  w-[150px] right-0  "
+                >
+                  <Flex>
+                    <div
+                      onClick={handleLogOut}
+                      className="flex justify-start items-center text-white cursor-pointer"
+                    >
+                      <img
+                        src={"/images/logouticon.png"}
+                        width={24}
+                        height={24}
+                        alt="log-out"
+                      />
+                      <span className="ml-2 text-black">Log out</span>
+                    </div>
+                  </Flex>
+                </div>
+              )}
+            </div>
+            {/* )} */}
           </Flex>
         </Header>
         <Content

@@ -8,7 +8,7 @@ const HomePage = () => {
         className="h-[92vh]"
         bgImage="/images/backgrounf.jpg"
         bgImageStyle={{ objectFit: "cover" }}
-        strength={400}
+        strength={200}
       >
         <div className="container max-w-1200">
           <div className="my-32  max-w-708">

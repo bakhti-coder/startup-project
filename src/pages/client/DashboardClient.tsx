@@ -3,50 +3,23 @@ import { useEffect } from "react";
 import CardDataStats from "../../components/card/CardDataStats";
 import ChartOne from "../../components/charts/ChartsOne";
 import useEducation from "../../state/education";
-import useExperiences from "../../state/experiences";
-import usePortfolios from "../../state/portfolios";
 import useSkills from "../../state/skills";
-import useUser from "../../state/user";
 
-const DashboardPage = () => {
-  const { total: userTotal, getData: getUsers } = useUser();
-  const { total: educationTotal, getData: getEducations } = useEducation();
-  const { total: expriencesTotal, getData: getExperienses } = useExperiences();
-  const { total: portfoliosTotal, getData: getPortfolios } = usePortfolios();
+const DashboardClient = () => {
   const { total: skillsTotal, getData: getSkills } = useSkills();
+  const { total: educationTotal, getData: getEducations } = useEducation();
 
   useEffect(() => {
-    getUsers();
     getEducations();
-    getExperienses();
-    getPortfolios();
     getSkills();
-  }, [getUsers, getEducations, getExperienses, getPortfolios, getSkills]);
+  }, [getEducations, getSkills]);
 
   const ChartStatistks = [
-    {
-      title: "Users",
-      total: userTotal,
-      rate: "4.34%",
-      img: "/images/user.jpg",
-    },
     {
       title: "Educations",
       total: educationTotal,
       rate: "2.34%",
       img: "/images/education.png",
-    },
-    {
-      title: "Portfolios",
-      total: portfoliosTotal,
-      rate: "2.01%",
-      img: "/images/projects.png",
-    },
-    {
-      title: "Experiences",
-      total: expriencesTotal,
-      rate: "2.4%",
-      img: "/images/experience.png",
     },
     {
       title: "Skills",
@@ -68,4 +41,4 @@ const DashboardPage = () => {
   );
 };
 
-export default DashboardPage;
+export default DashboardClient;
